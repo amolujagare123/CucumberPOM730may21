@@ -1,5 +1,10 @@
 Feature: all login scenarios
 
+  Background: before all the steps
+    Given browser should be opened
+# whatever you write in background it will execute before
+# every senario of that particular feature file
+
   @validLogin  @login
   Scenario: to test the functionality of login button for valid inputs
     Given login page should be opened

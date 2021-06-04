@@ -18,8 +18,7 @@ public class LoginSD {
 
         System.out.println("login page should be opened");
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+
         driver.manage().window().maximize();
         driver.get("http://stock.scriptinglogic.net/");
 
@@ -46,7 +45,7 @@ public class LoginSD {
 
         System.out.println("I should be redirected to homepage");
 
-        String expected ="http://stock.scriptinglogic.net/dashboard.php1";
+        String expected ="http://stock.scriptinglogic.net/dashboard.php";
         String actual = driver.getCurrentUrl();
 
         Assert.assertEquals("incorrect page",expected,actual);
@@ -62,7 +61,7 @@ public class LoginSD {
     @Then("I should get error message")
     public void i_should_get_error_message() {
 
-        String expected ="http://stock.scriptinglogic.net/index.php?msg=Wrong%20Username%20or%20Password&type=error";
+        String expected ="http://stock.scriptinglogic.net/index.php?msg=Wrong%20Username%20or%20Password&type=erro";
          String actual = driver.getCurrentUrl();
         Assert.assertEquals("incorrect page",expected,actual);
 
@@ -92,5 +91,18 @@ public class LoginSD {
 
              }
 
+
+    @When("^I type username as (.+) and password as (.+)$")
+    public void i_type_username_as_and_password_as(String username, String password) throws Throwable {
+        driver.findElement(By.xpath("//input[@type='text']")).sendKeys(username);
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
+    }
+
+
+    @Given("^browser should be opened$")
+    public void browser_should_be_opened() throws Throwable {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
 
 }
